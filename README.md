@@ -1,136 +1,58 @@
-# 🎮 Game 2048 Deployment on Amazon EKS
+# 🎮 Game 2048 on Amazon EKS
 
-## 📌 Project Overview
+## Project Overview
 
-This project demonstrates the deployment of the **Game 2048 application** on **Amazon Elastic Kubernetes Service (EKS)** using **AWS Fargate**, Kubernetes, Helm, and the AWS Load Balancer Controller.
+This project demonstrates how to deploy the Game 2048 application on Amazon EKS using Kubernetes and AWS Fargate.
 
-The application is deployed in the **AWS Mumbai region (`ap-south-1`)** and exposed to the internet using an **AWS Application Load Balancer (ALB)** through Kubernetes Ingress.
+The project also configures the AWS Load Balancer Controller to expose the application through an AWS Application Load Balancer (ALB).
 
----
+## Architecture
 
-## 🏗️ Architecture
-
-```text
-                         Internet
-                            |
-                            v
-                +----------------------+
-                |   AWS ALB / Ingress  |
-                +----------+-----------+
-                           |
-                           v
-                +----------------------+
-                |    AWS EKS Cluster   |
-                | demo-eks-cluster     |
-                +----------+-----------+
-                           |
-                           v
-                +----------------------+
-                | Kubernetes Ingress   |
-                +----------+-----------+
-                           |
-                           v
-                +----------------------+
-                | Kubernetes Service   |
-                +----------+-----------+
-                           |
-                           v
-                +----------------------+
-                |  Game 2048 Pods      |
-                |   AWS Fargate        |
-                +----------------------+
-
-
-🛠️ Technologies Used
+Developer
+   |
+   v
+GitHub
+   |
+   v
 Amazon EKS
-AWS Fargate
-Kubernetes
-AWS Application Load Balancer
-AWS Load Balancer Controller
-IAM
-IAM OIDC
-Helm
-eksctl
-kubectl
-AWS CLI
+   |
+   +----------------------+
+   |                      |
+   v                      v
+Fargate                 ALB Controller
+   |                      |
+   v                      v
+Game 2048 Pods       AWS Application Load Balancer
+                           |
+                           v
+                        Internet
 
+## Technologies
 
-📋 Prerequisites
+- AWS EKS
+- AWS Fargate
+- Kubernetes
+- AWS Load Balancer Controller
+- Application Load Balancer
+- IAM
+- OIDC
+- Helm
+- eksctl
+- kubectl
+- AWS CLI
 
-Before starting the project, install the following tools.
+## Implementation Steps
 
-1. AWS CLI
-
-AWS CLI is used to interact with AWS services.
-
-Check installation:
-
-aws --version
-
-Configure AWS credentials:
-
-aws configure
-
-Verify AWS account:
-
-aws sts get-caller-identity
-
-
-2. kubectl
-
-kubectl is used to interact with Kubernetes clusters.
-
-Check installation:
-
-kubectl version --client
-3. eksctl
-
-eksctl is used to create and manage Amazon EKS clusters.
-
-Check installation:
-
-eksctl version
-4. Helm
-
-Helm is used to install and manage Kubernetes applications and the AWS Load Balancer Controller.
-
-Check installation:
-
-helm version
-
-
-
-Verify All Tools
-aws --version
-kubectl version --client
-eksctl version
-helm version
-
-
-Step 1: Create EKS Cluster
-Cluster Configuration
-Configuration	Value
-Cluster Name	demo-eks-cluster
-AWS Region	ap-south-1
-Region Name	Mumbai
-Compute	AWS Fargate
-
-Create the EKS cluster:
-
-eksctl create cluster --name demo-eks-cluster --region ap-south-1 --fargate
-
-This command creates the EKS control plane and configures the required AWS networking and Fargate resources.
-
-Step 2: Verify EKS Cluster
-
-Check the cluster:
-
-eksctl get cluster --region ap-south-1
-
-Check cluster status:
-
-aws eks describe-cluster --name demo-eks-cluster --region ap-south-1 --query "cluster.status" --output text
-
-Expected output:
-
-ACTIVE
+1. Install prerequisites
+2. Create EKS cluster
+3. Configure kubectl
+4. Configure IAM OIDC provider
+5. Create IAM policy
+6. Create IAM service account
+7. Install AWS Load Balancer Controller
+8. Create Fargate profile
+9. Deploy Game 2048
+10. Configure Kubernetes Ingress
+11. Access application through ALB
+12. Verify deployment
+13. Clean up AWS resources
