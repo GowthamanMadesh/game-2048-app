@@ -39,3 +39,38 @@ The application is deployed in the **AWS Mumbai region (`ap-south-1`)** and expo
                 |  Game 2048 Pods      |
                 |   AWS Fargate        |
                 +----------------------+
+
+
+🛠️ Technologies Used
+Amazon EKS
+AWS Fargate
+Kubernetes
+AWS Application Load Balancer
+AWS Load Balancer Controller
+IAM
+IAM OIDC
+Helm
+eksctl
+kubectl
+AWS CLI
+
+
+📋 Prerequisites
+
+Before starting the project, install the following tools.
+
+1. AWS CLI
+
+AWS CLI is used to interact with AWS services.
+
+Check installation:
+
+aws --version
+
+Configure AWS credentials:
+
+aws configure
+
+Verify AWS account:
+
+aws sts get-caller-identity
