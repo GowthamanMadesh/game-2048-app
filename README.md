@@ -6,26 +6,37 @@ This project demonstrates how to deploy the Game 2048 application on Amazon EKS 
 
 The project also configures the AWS Load Balancer Controller to expose the application through an AWS Application Load Balancer (ALB).
 
-## Architecture
+## 🏗️ Architecture
 
-Developer
-   |
-   v
-GitHub
-   |
-   v
-Amazon EKS
-   |
-   +----------------------+
-   |                      |
-   v                      v
-Fargate                 ALB Controller
-   |                      |
-   v                      v
-Game 2048 Pods       AWS Application Load Balancer
+```text
+                         Internet
+                            |
+                            v
+                +----------------------+
+                |   AWS ALB / Ingress  |
+                +----------+-----------+
                            |
                            v
-                        Internet
+                +----------------------+
+                |    AWS EKS Cluster   |
+                | demo-eks-cluster     |
+                +----------+-----------+
+                           |
+                           v
+                +----------------------+
+                | Kubernetes Ingress   |
+                +----------+-----------+
+                           |
+                           v
+                +----------------------+
+                | Kubernetes Service   |
+                +----------+-----------+
+                           |
+                           v
+                +----------------------+
+                |  Game 2048 Pods      |
+                |   AWS Fargate        |
+                +----------------------+
 
 ## Technologies
 
